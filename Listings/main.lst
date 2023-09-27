@@ -1,4 +1,4 @@
-A51 MACRO ASSEMBLER  MAIN                                                                 09/25/2023 19:46:39 PAGE     1
+A51 MACRO ASSEMBLER  MAIN                                                                 09/27/2023 14:55:37 PAGE     1
 
 
 MACRO ASSEMBLER A51 V8.2.7.0
@@ -65,7 +65,7 @@ LOC  OBJ            LINE     SOURCE
 0042 908026           55         MOV     DPTR, #8026h
 0045 7401             56         MOV     A, #1
 0047 F0               57         MOVX    @DPTR, A
-A51 MACRO ASSEMBLER  MAIN                                                                 09/25/2023 19:46:39 PAGE     2
+A51 MACRO ASSEMBLER  MAIN                                                                 09/27/2023 14:55:37 PAGE     2
 
                       58     
 0048 908027           59         MOV     DPTR, #8027h
@@ -133,7 +133,7 @@ LOC  OBJ            LINE     SOURCE
 00AA 7209            121         ORL     C, 9            ;
 00AC 720A            122         ORL     C, 10           ;
 00AE 9208            123         MOV     8, C            ;
-A51 MACRO ASSEMBLER  MAIN                                                                 09/25/2023 19:46:39 PAGE     3
+A51 MACRO ASSEMBLER  MAIN                                                                 09/27/2023 14:55:37 PAGE     3
 
                      124     
                      125     ; Comparison of the obtained result with the reference function
@@ -160,40 +160,45 @@ LOC  OBJ            LINE     SOURCE
 00CD A2E0            146         MOV     C, ACC.0        ; | and the reference to the P4 channel
 00CF B3              147         CPL     C               ; |
 00D0 92C1            148         MOV     P4.1, C         ; /
-00D2 907FFB          149         MOV     DPTR, #7FFBh    ; \;
-00D5 7400            150         MOV     A, #00h         ; | Resetting the ready bit to 0
-00D7 F0              151         MOVX    @DPTR, A        ; /
-00D8 907FFA          152         MOV     DPTR, #7FFAh    ; \;
-00DB E0              153         MOVX    A, @DPTR        ; | The following set
-00DC 04              154         INC     A               ; | of input data
-00DD F0              155         MOVX    @DPTR, A        ; /
-00DE 908000          156             MOV     DPTR, #8000h
-00E1 14              157         DEC     A
-00E2 540F            158         ANL     A, #00001111b
-00E4 2420            159         ADD     A, #20h
-00E6 F582            160         MOV     DPL, A
-00E8 E0              161         MOVX    A, @DPTR
-00E9 F5F0            162         MOV     B, A
-00EB 740F            163         MOV     A, #15d
-00ED A4              164         MUL     AB
-00EE FA              165             MOV     R2, A
-00EF 758903          166         MOV     TMOD, #00000011b
-00F2                 167     PTR_5:
-00F2 79FF            168         MOV     R1, #0FFh
-00F4                 169     PTR_6:
-00F4 C28C            170         CLR     TR0;
-00F6 758A17          171         MOV     TL0, #17h;
-00F9 D28C            172         SETB    TR0;
-00FB                 173     PTR_7:
-00FB 108D02          174         JBC     TF0, PTR_8
-00FE 01FB            175             AJMP    PTR_7
-0100                 176     PTR_8:
-0100 D9F2            177         DJNZ    R1, PTR_6
-0102 DAEE            178         DJNZ    R2, PTR_5
-0104 017E            179         AJMP    PREPARING
-                     180     
-                     181     END
-A51 MACRO ASSEMBLER  MAIN                                                                 09/25/2023 19:46:39 PAGE     4
+00D2 907FFA          149         MOV     DPTR, #7FFAh
+00D5 E0              150         MOVX    A, @DPTR
+00D6 908000          151         MOV     DPTR, #8000h
+00D9 540F            152         ANL     A, #00001111b
+00DB 2420            153         ADD     A, #20h
+00DD F582            154         MOV     DPL, A
+00DF E0              155         MOVX    A, @DPTR
+00E0 F5F0            156         MOV     B, A
+00E2 740F            157         MOV     A, #15d
+00E4 A4              158         MUL     AB
+00E5 FA              159         MOV     R2, A
+00E6 758903          160         MOV     TMOD, #00000011b
+00E9 C28C            161             CLR     TR0
+00EB 758A00          162         MOV     TL0, #00h
+00EE D28C            163         SETB    TR0
+00F0                 164     PTR_5:
+00F0 79FF            165         MOV     R1, #0FFh
+00F2                 166     PTR_6:
+00F2 C28C            167         CLR     TR0
+00F4 758A17          168         MOV     TL0, #17h
+00F7 D28C            169         SETB    TR0
+00F9                 170     PTR_7:
+00F9 108D02          171         JBC     TF0, PTR_8
+00FC 01F9            172         AJMP    PTR_7
+00FE                 173     PTR_8:
+00FE D9F2            174         DJNZ    R1, PTR_6
+0100 DAEE            175         DJNZ    R2, PTR_5
+0102 907FFB          176         MOV     DPTR, #7FFBh    ; \;
+0105 7400            177         MOV     A, #00h         ; | Resetting the ready bit to 0
+0107 F0              178         MOVX    @DPTR, A        ; /
+0108 907FFA          179         MOV     DPTR, #7FFAh    ; \;
+010B E0              180         MOVX    A, @DPTR        ; | The following set
+010C 04              181         INC     A               ; | of input data
+010D F0              182         MOVX    @DPTR, A        ; /
+                     183     
+010E 017E            184         AJMP    PREPARING
+                     185     
+                     186     END
+A51 MACRO ASSEMBLER  MAIN                                                                 09/27/2023 14:55:37 PAGE     4
 
 SYMBOL TABLE LISTING
 ------ ----- -------
@@ -210,10 +215,10 @@ PTR_1. . . . . . .  C ADDR   00BAH   A
 PTR_2. . . . . . .  C ADDR   00BDH   A   
 PTR_3. . . . . . .  C ADDR   00C5H   A   
 PTR_4. . . . . . .  C ADDR   00C9H   A   
-PTR_5. . . . . . .  C ADDR   00F2H   A   
-PTR_6. . . . . . .  C ADDR   00F4H   A   
-PTR_7. . . . . . .  C ADDR   00FBH   A   
-PTR_8. . . . . . .  C ADDR   0100H   A   
+PTR_5. . . . . . .  C ADDR   00F0H   A   
+PTR_6. . . . . . .  C ADDR   00F2H   A   
+PTR_7. . . . . . .  C ADDR   00F9H   A   
+PTR_8. . . . . . .  C ADDR   00FEH   A   
 SHIFT. . . . . . .  C ADDR   00C0H   A   
 TF0. . . . . . . .  B ADDR   0088H.5 A   
 TL0. . . . . . . .  D ADDR   008AH   A   

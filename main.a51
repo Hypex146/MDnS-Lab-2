@@ -146,15 +146,9 @@ PTR_4:
     MOV     C, ACC.0        ; | and the reference to the P4 channel
     CPL     C               ; |
     MOV     P4.1, C         ; /
-    MOV     DPTR, #7FFBh    ; \;
-    MOV     A, #00h         ; | Resetting the ready bit to 0
-    MOVX    @DPTR, A        ; /
-    MOV     DPTR, #7FFAh    ; \;
-    MOVX    A, @DPTR        ; | The following set
-    INC     A               ; | of input data
-    MOVX    @DPTR, A        ; /
+    MOV     DPTR, #7FFAh
+    MOVX    A, @DPTR
     MOV     DPTR, #8000h
-    DEC     A
     ANL     A, #00001111b
     ADD     A, #20h
     MOV     DPL, A
@@ -164,18 +158,29 @@ PTR_4:
     MUL     AB
     MOV     R2, A
     MOV     TMOD, #00000011b
+	CLR     TR0
+    MOV     TL0, #00h
+    SETB    TR0
 PTR_5:
     MOV     R1, #0FFh
 PTR_6:
-    CLR     TR0;
-    MOV     TL0, #17h;
-    SETB    TR0;
+    CLR     TR0
+    MOV     TL0, #17h
+    SETB    TR0
 PTR_7:
     JBC     TF0, PTR_8
     AJMP    PTR_7
 PTR_8:
     DJNZ    R1, PTR_6
     DJNZ    R2, PTR_5
+    MOV     DPTR, #7FFBh    ; \;
+    MOV     A, #00h         ; | Resetting the ready bit to 0
+    MOVX    @DPTR, A        ; /
+    MOV     DPTR, #7FFAh    ; \;
+    MOVX    A, @DPTR        ; | The following set
+    INC     A               ; | of input data
+    MOVX    @DPTR, A        ; /
+
     AJMP    PREPARING
 
 END
