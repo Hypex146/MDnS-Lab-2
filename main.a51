@@ -165,7 +165,7 @@ PTR_5:
     MOV     R1, #0FFh
 PTR_6:
     CLR     TR0
-    MOV     TL0, #17h
+    MOV     TL0, #22d
     SETB    TR0
 PTR_7:
     JBC     TF0, PTR_8
