@@ -158,7 +158,7 @@ PTR_4:
     MUL     AB
     MOV     R2, A
     MOV     TMOD, #00000011b
-	CLR     TR0
+    CLR     TR0
     MOV     TL0, #00h
     SETB    TR0
 PTR_5:
